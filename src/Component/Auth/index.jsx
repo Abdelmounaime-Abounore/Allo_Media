@@ -14,7 +14,6 @@ const Authentification = () => {
         <div className='container'>
             <div className='header'>
                 <div>{action}</div>
-                <div className='underline'></div>
             </div>
             <div className='form'>
                 {action === "Login" ?
