@@ -57,10 +57,6 @@ const Authentification = () => {
 
             </div>
             <div className='buttons'>
-                <div className='submits'>
-                    <div className={action === "Login" ? "state" : "submit"} onClick={() => { setAction("Register") }}>Register</div>
-                    <div className={action === "Register" ? "state" : "submit"} onClick={() => { setAction("Login") }}>Login</div>
-                </div>
                 {action === "Register" ?
                     <></> :
                     <div>
@@ -68,6 +64,10 @@ const Authentification = () => {
                         {/* <div className='underline'></div> */}
                     </div>
                 }
+                <div className='submits'>
+                    <div className={action === "Login" ? "state" : "submit"} onClick={() => { setAction("Register") }}>Register</div>
+                    <div className={action === "Register" ? "state" : "submit"} onClick={() => { setAction("Login") }}>Login</div>
+                </div>
             </div>
         </div>
     );
