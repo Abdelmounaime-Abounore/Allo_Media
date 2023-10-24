@@ -83,8 +83,13 @@ const Authentification = () => {
                                 <input type="text" name='address' placeholder='Adress .. ' value={formData.address} onChange={handleInputChange} />
                             </div>
                             <div className='inputs'>
-                                <FontAwesomeIcon icon={faLocationDot} />
-                                <input type="text" name='roleName' placeholder='Role .. ' value={formData.roleName} onChange={handleInputChange} />
+                                {/* <FontAwesomeIcon icon={faLocationDot} /> */}
+                                {/* <input type="text" name='roleName' placeholder='Role .. ' value={formData.roleName} onChange={handleInputChange} /> */}
+                                <select name='roleName' placeholder='Role .. ' value={formData.roleName} onChange={handleInputChange} >
+                                    <option value=""></option>
+                                    <option value="client">Client</option>
+                                    <option value="livreur">Livreur</option>
+                                </select>
                             </div>
                             <div className='input-img'>
                                 <FontAwesomeIcon icon={faImage} />
