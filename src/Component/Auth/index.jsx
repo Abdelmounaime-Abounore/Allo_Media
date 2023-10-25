@@ -33,11 +33,23 @@ const Authentification = () => {
         });
     };
 
-    const handleFormSubmit = async (e) => {
+    const handleRegisterSubmit = async (e) => {
         // e.preventDefault();
 
         try {
             const response = await axios.post('http://localhost:9000/api/auth/register', formData);
+
+            console.log('Response Data:', response.data); 
+        } catch (error) {
+            console.error('Error:', error); 
+        }
+    }
+
+    const handleLoginSubmit = async (e) => {
+        // e.preventDefault();
+
+        try {
+            const response = await axios.post('http://localhost:9000/api/auth/login', formData);
 
             console.log('Response Data:', response.data); 
         } catch (error) {
@@ -53,7 +65,19 @@ const Authentification = () => {
         .matches(/^\+(?:[0-9] ?){6,14}[0-9]$/, '*Invalid phone number')
         .required(),
         address: yup.string().required("*Your adress is required"),
-        roleName: yup.string().required("*Invalid role")
+        roleName: yup.string().required("*Invalid role"),
+        image: yup.mixed().test({
+            name: 'fileTypeAndSize',
+            message: 'Invalid file format or file is too large',
+            test: (value) => {
+                if (!value) return true;
+    
+                const validTypes = ["image/jpeg", "image/png", "image/gif"];
+                const maxSize = 5242880; // 5MB
+    
+                return validTypes.includes(value.type) && value.size <= maxSize;
+            },
+        }),
     })
     
     const { register, handleSubmit, formState: {errors}} = useForm({
@@ -65,17 +89,17 @@ const Authentification = () => {
             <div className='header'>
                 <div>{action}</div>
             </div>
-            <form onSubmit={handleSubmit(handleFormSubmit)}>
+            <form onSubmit={handleSubmit(handleRegisterSubmit)}>
                 <div className='form'>
                     {action === "Login" ?
                         <>
                             <div className='inputs'>
                                 <FontAwesomeIcon icon={faUser} />
-                                <input type="text" name='name' placeholder='User Name .. ' />
+                                <input type="email" name='email' {...register("email")} placeholder='Email .. ' />
                             </div>
                             <div className='inputs'>
                                 <FontAwesomeIcon icon={faLock} />
-                                <input type="password" name='password' placeholder='Password .. ' />
+                                <input type="password" name='password' {...register("password")} placeholder='Password .. ' />
                             </div>
                         </> :
                         <>
@@ -116,8 +140,10 @@ const Authentification = () => {
                             <p>{errors.roleName?.message}</p>
                             <div className='input-img'>
                                 <FontAwesomeIcon icon={faImage} />
-                                <input name='image' type="file" value={formData.image} onChange={handleInputChange} required/>
+                                <input name='image' type="file" value={formData.image} {...register("image")} onChange={handleInputChange} />
                             </div>
+                            <p>{errors.image?.message}</p>
+
                         </>
                     }
                 </div>
