@@ -40,6 +40,16 @@ body {
     color: #feba65;
 }   
 
+.options {
+    width: 40%;
+}
+
+select {
+    width: 100%;
+    border-radius: 5px;
+    padding: 5px;
+}
+
 input {
     width: 90%;
     height: 30px;
@@ -97,6 +107,10 @@ input:focus {
     cursor: pointer;
     width: 40%;
     text-align: center;
+}
+
+p {
+    color: #feba65;
 }
 
 

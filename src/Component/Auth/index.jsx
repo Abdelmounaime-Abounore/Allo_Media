@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import {useForm} from 'react-hook-form'
+import {yupResolver} from '@hookform/resolvers/yup'
+import * as yup from "yup"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
@@ -31,24 +34,38 @@ const Authentification = () => {
     };
 
     const handleFormSubmit = async (e) => {
-        e.preventDefault();
+        // e.preventDefault();
 
         try {
             const response = await axios.post('http://localhost:9000/api/auth/register', formData);
 
-            console.log('Response Data:', response.data); // Handle successful registration
+            console.log('Response Data:', response.data); 
         } catch (error) {
-            console.error('Error:', error); // Handle registration error
+            console.error('Error:', error); 
         }
     };
 
+    const schema = yup.object().shape({
+        name: yup.string().required("*Your name is Required"),
+        password: yup.string().min(8).max(20).required(),
+        email: yup.string().email().required("*Invalid Email"),
+        phoneNumber: yup.string()
+        .matches(/^\+(?:[0-9] ?){6,14}[0-9]$/, '*Invalid phone number')
+        .required(),
+        address: yup.string().required("*Your adress is required"),
+        roleName: yup.string().required("*Invalid role")
+    })
+    
+    const { register, handleSubmit, formState: {errors}} = useForm({
+        resolver: yupResolver(schema),
+    })
 
     return (
         <div className='container'>
             <div className='header'>
                 <div>{action}</div>
             </div>
-            <form onSubmit={handleFormSubmit}>
+            <form onSubmit={handleSubmit(handleFormSubmit)}>
                 <div className='form'>
                     {action === "Login" ?
                         <>
@@ -64,36 +81,42 @@ const Authentification = () => {
                         <>
                             <div className='inputs'>
                                 <FontAwesomeIcon icon={faUser} />
-                                <input type="text" name='name' placeholder='User Name .. ' value={formData.name} onChange={handleInputChange} />
+                                <input type="text" name='name' placeholder='User Name .. ' value={formData.name} {...register("name")} onChange={handleInputChange}  />
                             </div>
+                            <p>{errors.name?.message}</p>
                             <div className='inputs'>
                                 <FontAwesomeIcon icon={faLock} />
-                                <input type="password" name='password' placeholder='Password .. ' value={formData.password} onChange={handleInputChange} />
+                                <input type="password" name='password' placeholder='Password .. ' value={formData.password} {...register("password")} onChange={handleInputChange} />
                             </div>
+                            <p>{errors.password?.message}</p>
                             <div className='inputs'>
                                 <FontAwesomeIcon icon={faEnvelope} />
-                                <input type="email" name='email' placeholder='Email .. ' value={formData.email} onChange={handleInputChange} />
+                                <input type="email" name='email' placeholder='Email .. ' value={formData.email} {...register("email")} onChange={handleInputChange} />
                             </div>
+                            <p>{errors.email?.message}</p>
                             <div className='inputs'>
                                 <FontAwesomeIcon icon={faPhone} />
-                                <input type="text" name='phoneNumber' placeholder='Phone .. ' value={formData.phoneNumber} onChange={handleInputChange} />
+                                <input type="text" name='phoneNumber' placeholder='Phone .. ' value={formData.phoneNumber} {...register("phoneNumber")} onChange={handleInputChange} />
                             </div>
+                            <p>{errors.phoneNumber?.message}</p>
                             <div className='inputs'>
                                 <FontAwesomeIcon icon={faLocationDot} />
-                                <input type="text" name='address' placeholder='Adress .. ' value={formData.address} onChange={handleInputChange} />
+                                <input type="text" name='address' placeholder='Adress .. ' value={formData.address} {...register("address")} onChange={handleInputChange} />
                             </div>
-                            <div className='inputs'>
+                            <p>{errors.address?.message}</p>
+                            <div className='options'>
                                 {/* <FontAwesomeIcon icon={faLocationDot} /> */}
                                 {/* <input type="text" name='roleName' placeholder='Role .. ' value={formData.roleName} onChange={handleInputChange} /> */}
-                                <select name='roleName' placeholder='Role .. ' value={formData.roleName} onChange={handleInputChange} >
-                                    <option value=""></option>
+                                <select name='roleName' value={formData.roleName} {...register("roleName")} onChange={handleInputChange} >
+                                    <option value="">Role .. </option>
                                     <option value="client">Client</option>
                                     <option value="livreur">Livreur</option>
                                 </select>
                             </div>
+                            <p>{errors.roleName?.message}</p>
                             <div className='input-img'>
                                 <FontAwesomeIcon icon={faImage} />
-                                <input name='image' type="file" value={formData.image} onChange={handleInputChange} />
+                                <input name='image' type="file" value={formData.image} onChange={handleInputChange} required/>
                             </div>
                         </>
                     }
