@@ -1,13 +1,21 @@
 import React from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
-import Authentification from './Component/Auth'
+import Athentification from './Component/Auth/index'
+import Login from './Component/Login/index'
+import EmailVerification from './Component/EmailVerification/index'
 
 function App() {
 
   return (
-    <div>
-      <Authentification />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Athentification />} />
+        <Route path='/login' element={<Login />} />
+        <Route path="/client/email-verify/:token" element={<EmailVerification />} />
+
+      </Routes>
+    </BrowserRouter>
   )
 }
 

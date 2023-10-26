@@ -107,25 +107,15 @@ input:focus {
     cursor: pointer;
     width: 40%;
     text-align: center;
+    text-decoration: none;
 }
 
 p {
     color: #feba65;
+    font-size: 13px;
 }
 
-.success-message{
-    color: #feba65;
-    font-size: 18px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 16%;
-    margin: auto;
-}
 
-.msg {
-    padding-right: 10px;
-}
 
 
 
