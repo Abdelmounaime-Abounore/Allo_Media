@@ -113,5 +113,19 @@ p {
     color: #feba65;
 }
 
+.success-message{
+    color: #feba65;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 16%;
+    margin: auto;
+}
+
+.msg {
+    padding-right: 10px;
+}
+
 
 
