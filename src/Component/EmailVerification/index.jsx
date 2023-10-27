@@ -1,22 +1,27 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const EmailVerification = () => {
-  const { token } = useParams();
-
+  
+  const location = useLocation();
+  
   useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    let token = searchParams.get('token');
+  
+    token = token.replace(/-/g, '.')
     const verifyEmail = async () => {
       try {
         const response = await axios.get(`http://localhost:9000/api/auth/client/verify/${token}`);
-        console.log(response.data.message); // This will be the message from your backend
+        console.log(response.data.message); 
       } catch (error) {
         console.error(error);
       }
     };
 
     verifyEmail();
-  }, [token]);
+  }, [location]);
 
   return (
     <div>
