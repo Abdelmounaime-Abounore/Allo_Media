@@ -16,6 +16,7 @@ const Login = () => {
         password: ''
     })
 
+    const [error, setError] = useState('');
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -29,7 +30,11 @@ const Login = () => {
 
         try {
             const response = await axios.post('http://localhost:9000/api/auth/login', formData);
-      
+            console.log(response)
+                console.log(response.status); // Log the status to verify it's 400
+            if (response.status === 400) {
+                console.log("hhhhhhhhhhh")
+            } 
             console.log(response.data);
           } catch (error) {
             console.error(error);
@@ -48,6 +53,7 @@ const Login = () => {
     return (
         <div>
             <div className='container'>
+                {error && <p>{error}</p>}   
                 <div className='header'>
                     <div>Login</div>
                 </div>

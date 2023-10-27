@@ -15,7 +15,6 @@ const EmailVerification = () => {
     const verifyEmail = async () => {
       try {
         const response = await axios.get(`http://localhost:9000/api/auth/verify/${role}/${token}`);
-        console.log("hhhhhhh");
         console.log(response.data.message); 
       } catch (error) {
         console.error(error);
