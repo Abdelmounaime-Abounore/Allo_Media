@@ -8,12 +8,14 @@ const EmailVerification = () => {
   
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
-    let token = searchParams.get('token');
+  let token = searchParams.get('token');
+  let role = searchParams.get('role');
   
-    token = token.replace(/-/g, '.')
+  token = token.replace(/-/g, '.')
     const verifyEmail = async () => {
       try {
-        const response = await axios.get(`http://localhost:9000/api/auth/client/verify/${token}`);
+        const response = await axios.get(`http://localhost:9000/api/auth/verify/${role}/${token}`);
+        console.log("hhhhhhh");
         console.log(response.data.message); 
       } catch (error) {
         console.error(error);

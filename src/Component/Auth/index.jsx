@@ -49,7 +49,7 @@ const Authentification = () => {
 
             setTimeout(() => {
                 setSuccessMessage("");
-            }, 5000);
+            }, 900000);
 
 
             setFormData({

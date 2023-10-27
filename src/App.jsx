@@ -12,7 +12,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Athentification />} />
         <Route path='/login' element={<Login />} />
-        <Route path="/client/email-verify" element={<EmailVerification />} />
+        <Route path="/email-verify" element={<EmailVerification />} />
 
       </Routes>
     </BrowserRouter>
