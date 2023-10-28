@@ -5,18 +5,19 @@ import * as yup from "yup"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import './index.css'
 import { Link } from 'react-router-dom';
 
 const Login = () => {
 
+    const [errorMessage, setErrorMessage] = useState('');
+
     const [formData, setFormData] = useState({
         email: '',
         password: ''
     })
-
-    const [error, setError] = useState('');
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -29,16 +30,14 @@ const Login = () => {
     const handleLoginSubmit = async (e) => {
 
         try {
-            const response = await axios.post('http://localhost:9000/api/auth/login', formData);
-            console.log(response)
-                console.log(response.status); // Log the status to verify it's 400
-            if (response.status === 400) {
-                console.log("hhhhhhhhhhh")
-            } 
+            const response = await axios.post('http://localhost:9000/api/auth/login', formData); 
             console.log(response.data);
-          } catch (error) {
-            console.error(error);
-          }
+        } catch (error) {
+            console.error('Error:', error);
+            if (error.response && error.response.status === 400) {
+                setErrorMessage('incorrect information. Please check your inputs.');
+            }
+        }
     };
 
     const schema = yup.object().shape({
@@ -52,8 +51,12 @@ const Login = () => {
 
     return (
         <div>
+            {errorMessage && (
+                <div className="error-message">
+                    <div className="msg"><FontAwesomeIcon className="msg" icon={faTriangleExclamation} /> {errorMessage}</div>
+                </div>
+            )}  
             <div className='container'>
-                {error && <p>{error}</p>}   
                 <div className='header'>
                     <div>Login</div>
                 </div>

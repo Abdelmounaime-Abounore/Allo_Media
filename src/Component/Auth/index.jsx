@@ -75,15 +75,6 @@ const Authentification = () => {
             .required(),
         address: yup.string().required("*Your adress is required"),
         roleName: yup.string().required("*Invalid role"),
-        //     image: yup
-        // .mixed()
-        // .required("*Image field is required")
-        // .test('fileType', 'Invalid file format', function (value) {
-        //   if (!value) return true;
-
-        //   const validTypes = ['image/jpeg', 'image/png', 'image/gif'];
-        //   return validTypes.includes(value.type);
-        // }),
     })
 
     const { register, handleSubmit, formState: { errors } } = useForm({
@@ -95,8 +86,8 @@ const Authentification = () => {
             {
                 successMessage &&
                 <div className='success-message'>
-                    <FontAwesomeIcon className="msg" icon={faCheck} />
-                    <div>{successMessage}</div>
+                    
+                    <div className='msg'><FontAwesomeIcon className="msg" icon={faCheck} /> {successMessage}</div>
                 </div>
             }
             <div className='container'>

@@ -115,6 +115,14 @@ p {
     font-size: 13px;
 }
 
+.success-message {
+    color: #feba65;
+    text-align: center;
+    padding: 20px;
+}
+
+
+
 
 
 
