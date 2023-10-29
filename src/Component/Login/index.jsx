@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom"
 const Login = () => {
 
     const [errorMessage, setErrorMessage] = useState('');
+    const [verificationMessage, setVerificationMessage] = useState('');
     const navigate = useNavigate() ;
 
 
@@ -36,10 +37,14 @@ const Login = () => {
 
         try {
             const response = await axios.post('http://localhost:9000/api/auth/login', formData);
-            console.log(response.data);
-            navigate("/home", { state: { user: response.data.user } })
+            const { verificationMessage, user } = response.data;
+            if (verificationMessage) {
+                setVerificationMessage(verificationMessage);
+            } else {
+                navigate("/home", { state: { user } });
+            }
+            
         } catch (error) {
-            console.error('Error:', error);
             if (error.response && error.response.status === 400) {
                 setErrorMessage('incorrect information. Please check your inputs.');
 
@@ -64,6 +69,11 @@ const Login = () => {
             {errorMessage && (
                 <div className="error-message">
                     <div className="msg"><FontAwesomeIcon className="msg" icon={faTriangleExclamation} /> {errorMessage}</div>
+                </div>
+            )}
+            {verificationMessage && (
+                <div className="error-message">
+                    <div className="msg"><FontAwesomeIcon className="msg" icon={faTriangleExclamation} /> {verificationMessage}</div>
                 </div>
             )}
             <div className='container'>
