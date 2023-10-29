@@ -9,10 +9,15 @@ import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import './index.css'
 import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom"
+
+
 
 const Login = () => {
 
     const [errorMessage, setErrorMessage] = useState('');
+    const navigate = useNavigate() ;
+
 
     const [formData, setFormData] = useState({
         email: '',
@@ -30,12 +35,17 @@ const Login = () => {
     const handleLoginSubmit = async (e) => {
 
         try {
-            const response = await axios.post('http://localhost:9000/api/auth/login', formData); 
+            const response = await axios.post('http://localhost:9000/api/auth/login', formData);
             console.log(response.data);
+            navigate("/home", { state: { user: response.data.user } })
         } catch (error) {
             console.error('Error:', error);
             if (error.response && error.response.status === 400) {
                 setErrorMessage('incorrect information. Please check your inputs.');
+
+                setTimeout(() => {
+                    setErrorMessage("");
+                }, 5000);
             }
         }
     };
@@ -55,7 +65,7 @@ const Login = () => {
                 <div className="error-message">
                     <div className="msg"><FontAwesomeIcon className="msg" icon={faTriangleExclamation} /> {errorMessage}</div>
                 </div>
-            )}  
+            )}
             <div className='container'>
                 <div className='header'>
                     <div>Login</div>

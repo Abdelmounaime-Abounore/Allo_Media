@@ -38,7 +38,6 @@ const Authentification = () => {
     };
 
     const handleRegisterSubmit = async (e) => {
-        // e.preventDefault();
 
         try {
             const response = await axios.post('http://localhost:9000/api/auth/register', formData);
@@ -49,7 +48,7 @@ const Authentification = () => {
 
             setTimeout(() => {
                 setSuccessMessage("");
-            }, 900000);
+            }, 5000);
 
 
             setFormData({
@@ -102,14 +101,14 @@ const Authentification = () => {
                         </div>
                         <p>{errors.name?.message}</p>
                         <div className='inputs'>
+                            <FontAwesomeIcon icon={faEnvelope} />
+                            <input type="email" name='email' placeholder='Email .. ' value={formData.email} {...register("email")} onChange={handleInputChange} />
+                        </div>
+                        <div className='inputs'>
                             <FontAwesomeIcon icon={faLock} />
                             <input type="password" name='password' placeholder='Password .. ' value={formData.password} {...register("password")} onChange={handleInputChange} />
                         </div>
                         <p>{errors.password?.message}</p>
-                        <div className='inputs'>
-                            <FontAwesomeIcon icon={faEnvelope} />
-                            <input type="email" name='email' placeholder='Email .. ' value={formData.email} {...register("email")} onChange={handleInputChange} />
-                        </div>
                         <p>{errors.email?.message}</p>
                         <div className='inputs'>
                             <FontAwesomeIcon icon={faPhone} />

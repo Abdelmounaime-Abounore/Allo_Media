@@ -97,6 +97,7 @@ input:focus {
     cursor: pointer;
     width: 40%;
     text-align: center;
+    font-size: 15px;
 }
 
 .state {
@@ -108,6 +109,7 @@ input:focus {
     width: 40%;
     text-align: center;
     text-decoration: none;
+    font-size: 15px;
 }
 
 p {
