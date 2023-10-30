@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function Home() {
   const location = useLocation();
@@ -8,6 +9,18 @@ function Home() {
 
   const [verificationMessage, setVerificationMessage] = useState('');
   const [user, setUser] = useState(locationUser);
+  const navigate = useNavigate()
+
+  const handleLogout = async () => {
+    try {
+      await axios.post('http://localhost:9000/api/auth/logout');
+      localStorage.clear(); 
+      document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      navigate("/login")
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
+  }
 
   useEffect(() => {
     const message = localStorage.getItem('verificationMessage');
@@ -30,7 +43,10 @@ function Home() {
       )}
 
       {user && (
-        <p>{`Welcome ${user.name}, you are ${user.role}`}</p>
+        <div>
+          <p>{`Welcome ${user.name}, you are ${user.role}`}</p>
+          <button onClick={handleLogout}>Logout</button>
+        </div>
       )}
     </div>
   );
