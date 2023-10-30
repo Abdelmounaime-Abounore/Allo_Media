@@ -5,6 +5,8 @@ import Athentification from './Component/Register/index'
 import Login from './Component/Login/index'
 import EmailVerification from './Component/EmailVerification/index'
 import Home from './Component/Home'
+import ForgetPassword from './Component/ForgetPassword/index'
+import ResetPassword from './Component/ResetPassword'
 
 function App() {
 
@@ -15,6 +17,8 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path="/email-verify" element={<EmailVerification />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/forget-password" element={<ForgetPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
 
       </Routes>
     </BrowserRouter>

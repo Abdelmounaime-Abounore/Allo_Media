@@ -96,7 +96,7 @@ const Login = () => {
                     </div>
                     <div className='buttons'>
                         <div>
-                            <div className="forgot-password">Forgot Password</div>
+                            <a href="/forget-password" className="text-xs text-gray-600 hover:underline hover:text-blue-600">Forget Password</a>
                         </div>
                         <div className='submits'>
                             <button type='submit' className="submit">Login</button>
