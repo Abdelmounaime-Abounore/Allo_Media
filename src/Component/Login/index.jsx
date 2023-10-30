@@ -35,10 +35,14 @@ const Login = () => {
         try {
           const response = await axios.post('http://localhost:9000/api/auth/login', formData);
           const { verificationMessage, user } = response.data;
-          
+          console.log("here === ")
+          document.cookie = "token="+response.data.token
+          console.log("here 2 === ")
           if (verificationMessage) {
             localStorage.setItem('verificationMessage', verificationMessage);
             setVerificationMessage(verificationMessage);
+         
+
           } else {
             localStorage.setItem('user', JSON.stringify(user));
             navigate("/home", { state: { user } });
