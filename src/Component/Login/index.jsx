@@ -11,8 +11,6 @@ import './index.css'
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom"
 
-
-
 const Login = () => {
 
     const [errorMessage, setErrorMessage] = useState('');
@@ -34,26 +32,27 @@ const Login = () => {
     };
 
     const handleLoginSubmit = async (e) => {
-
         try {
-            const response = await axios.post('http://localhost:9000/api/auth/login', formData);
-            const { verificationMessage, user } = response.data;
-            if (verificationMessage) {
-                setVerificationMessage(verificationMessage);
-            } else {
-                navigate("/home", { state: { user } });
-            }
-            
+          const response = await axios.post('http://localhost:9000/api/auth/login', formData);
+          const { verificationMessage, user } = response.data;
+          
+          if (verificationMessage) {
+            localStorage.setItem('verificationMessage', verificationMessage);
+            setVerificationMessage(verificationMessage);
+          } else {
+            localStorage.setItem('user', JSON.stringify(user));
+            navigate("/home", { state: { user } });
+          }
         } catch (error) {
-            if (error.response && error.response.status === 400) {
-                setErrorMessage('incorrect information. Please check your inputs.');
-
-                setTimeout(() => {
-                    setErrorMessage("");
-                }, 5000);
-            }
+          if (error.response && error.response.status === 400) {
+            setErrorMessage('incorrect information. Please check your inputs');
+      
+            setTimeout(() => {
+              setErrorMessage('');
+            }, 5000);
+          }
         }
-    };
+      };
 
     const schema = yup.object().shape({
         email: yup.string().email().required("*Invalid Email"),
