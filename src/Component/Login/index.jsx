@@ -33,7 +33,7 @@ const Login = () => {
 
     const handleLoginSubmit = async (e) => {
         try {
-          const response = await axios.post('http://localhost:9000/api/auth/login', formData);
+          const response = await axios.post('http://localhost:8080/api/auth/login', formData);
           const { verificationMessage, user } = response.data;
           document.cookie = "token="+response.data.token
           if (verificationMessage) {

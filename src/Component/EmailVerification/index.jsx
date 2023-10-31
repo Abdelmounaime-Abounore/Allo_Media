@@ -1,6 +1,7 @@
 import React, { useState ,useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
+import './index.css'
 
 const EmailVerification = () => {
   
@@ -16,7 +17,7 @@ const EmailVerification = () => {
     token = token.replace(/-/g, '.')
     const verifyEmail = async () => {
       try {
-        const response = await axios.get(`http://localhost:9000/api/auth/verify/${role}/${token}`);
+        const response = await axios.get(`http://localhost:8080/api/auth/verify/${role}/${token}`);
         const message = response.data.message;
         setVerificationMessage(message);
 
@@ -33,8 +34,8 @@ const EmailVerification = () => {
 
   return (
     <div>
-      <p>{verificationMessage}</p>
-      <Link to="/home" className="state">Go Home</Link>
+      <h1>{verificationMessage}</h1>
+      <Link to="/home" className="goHome">Go Home</Link>
     </div>
   );
 };
