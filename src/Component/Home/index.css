@@ -1,0 +1,17 @@
+.logout {
+    width: 70px;
+    margin: auto;
+}
+
+.btn {
+    background-color: rgb(218, 194, 194);
+    border-radius: 20px;
+    padding: 8px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.link {
+    text-decoration: none;
+    padding: 10px;
+}

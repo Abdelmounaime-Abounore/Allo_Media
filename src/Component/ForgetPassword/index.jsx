@@ -2,6 +2,8 @@ import './index.css'
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 function ForgetPassword() {
 
     const [formData, setData] = useState({
@@ -29,22 +31,49 @@ function ForgetPassword() {
     return (
         <div className="forgetPass">
             <div>
-                <form action="" onSubmit={handelSubmuit}>
-                    <div><label >Email</label></div>
-                    <div>
-                        <input name="email" type="email" placeholder="Email Address" onChange={handelInputChange} />
+                {/* <form action="" onSubmit={handelSubmuit}>
+                    <div className='container'>
+                        <div className='resetPass'>
+                            <input className='' name="email" type="email" placeholder="Email Address" onChange={handelInputChange} />
+                        </div>
+                        <div>
+                            <button type="submit">submit</button>
+                        </div>
+                        <div>
+                            <Link to="/login">Login</Link>
+                        </div>
+                        <div>
+                            <Link to="/">Register</Link>
+                        </div>
                     </div>
-                    <div>
-                        <button type="submit">submit</button>
-                    </div>
-                </form>
-                <div>
-                    <Link to="/login">Login</Link>
-                </div>
-                <div>
-                    <Link to="/">Register</Link>
+                </form> */}
+                <div className='container'>
+                    <h1>Enter you Email to Reset Password</h1>
+                    <form onSubmit={handelSubmuit}>
+                        <div className='form'>
+                            <div className='inputs email-inp'>
+                                <FontAwesomeIcon icon={faEnvelope} />
+                                <input type="email" name='email' placeholder='Email .. ' value={formData.email} onChange={handelInputChange} />
+                            </div>
+                        </div>
+                        <div className='buttons'>
+                            <div className=''>
+                                <button type='submit' className="submit submit-email">Submit</button>
+                            </div>
+                        </div>
+                        <div className='buttons'>
+                            <div className='forg-pass-btn'>
+                                <Link to="/login"  className="forg-pass-login">Login</Link>
+                                <Link to="/" className="state">Register</Link>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
+            {/* <div className='res-pass-btn'>
+                <Link to="/" className="state">Register</Link>
+                <Link to="/" className="state">Login</Link>
+            </div> */}
         </div>
     );
 }

@@ -95,8 +95,8 @@ const Login = () => {
                         <p>{errors.password?.message}</p>
                     </div>
                     <div className='buttons'>
-                        <div>
-                            <a href="/forget-password" className="text-xs text-gray-600 hover:underline hover:text-blue-600">Forget Password</a>
+                        <div className='div-pass'>
+                            <Link to="/forget-password" className="forgetPass">Forget Password</Link>
                         </div>
                         <div className='submits'>
                             <button type='submit' className="submit">Login</button>

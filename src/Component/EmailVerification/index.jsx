@@ -35,7 +35,9 @@ const EmailVerification = () => {
   return (
     <div>
       <h1>{verificationMessage}</h1>
-      <Link to="/home" className="goHome">Go Home</Link>
+      <div className='link'>
+        <Link to="/home" className="goHome">Go Home</Link>
+      </div>
     </div>
   );
 };

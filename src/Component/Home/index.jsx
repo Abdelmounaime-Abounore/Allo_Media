@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import './index.css'
 
 function Home() {
   const location = useLocation();
@@ -44,8 +45,12 @@ function Home() {
 
       {user && (
         <div>
-          <p>{`Welcome ${user.name}, you are ${user.role}`}</p>
-          <button onClick={handleLogout}>Logout</button>
+          <div>
+            <h1>{`Welcome ${user.name}, you are ${user.role}`}</h1>
+          </div>
+          <div className='logout'>
+            <button className='btn' onClick={handleLogout}><Link to="/login" className='link'>Logout</Link></button>
+          </div>
         </div>
       )}
     </div>

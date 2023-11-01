@@ -1,7 +1,32 @@
-/* .forgetPass {
-    background-color: white;
+h1 {
+    padding: 17px;
 }
-input {
+.email-inp {
+    margin-top: 15px;
+}
+
+.submit-email {
+    width: 20%;
+}
+
+.res-pass-btn {
+    display: flex;
+    justify-content: space-between;
+    width: 215px;
+}
+
+.forg-pass-btn {
+    margin-top: 35px;
+}
+
+.forg-pass-login {
+    background-color: #feba65;
+    color: #19284f;
     border-radius: 20px;
+    padding: 8px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+    margin-right: 5px;
 }
- */

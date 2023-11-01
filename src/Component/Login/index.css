@@ -1,4 +1,4 @@
-a {
+Link {
     color: #feba65;
     font-size: 13px;
 }
@@ -7,4 +7,14 @@ a {
     color: #feba65;
     text-align: center;
     padding: 20px;
+}
+
+.div-pass {
+    margin-bottom: 10px;
+}
+
+.forgetPass {
+    text-decoration: none;
+    color: #feba65;
+    font-size: 14px;
 }
